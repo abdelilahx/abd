@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cours - TechnoEdu</title>
+  <style>
+    /* ----- RESET ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #f9fafc;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ----- HEADER ----- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 10%;
+      background: #2563eb;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    nav ul li a:hover, 
+    nav ul li a:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #dbeafe;
+    }
+
+    /* ----- CONTENT ----- */
+    .container {
+      padding: 40px 10%;
+      flex: 1;
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #1e40af;
+    }
+
+    /* ----- SEARCH AND FILTER ----- */
+    .search-filter {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 500px;
+    }
+
+    .search-box input {
+      padding: 12px 15px 12px 45px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      width: 100%;
+      transition: border-color 0.3s;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+    }
+
+    .menu-selects {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .menu-selects select {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      background-color: white;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .menu-selects select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    /* ----- COURSES GRID ----- */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .course-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      border-left: 4px solid #2563eb;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+
+    .course-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+
+    .course-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e40af;
+      flex: 1;
+      line-height: 1.4;
+    }
+
+    .course-code {
+      background: #2563eb;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-left: 10px;
+      flex-shrink: 0;
+    }
+
+    .course-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .action-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: #f8fafc;
+      color: #2563eb;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: 0.3s;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .action-button:hover {
+      background: #2563eb;
+      color: white;
+    }
+
+    /* ----- ADS SECTION ----- */
+    .ad-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 10%;
+      background: #f1f5f9;
+      min-height: 90px;
+      margin: 20px 0;
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #1e3a8a;
+      color: white;
+      margin-top: auto;
+    }
+
+    /* ----- MOBILE ----- */
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+      padding: 5px;
+    }
+
+    .menu-toggle:focus {
+      outline: 2px solid white;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 1024px) {
+      .courses-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 5%;
+      }
+      
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #1e40af;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        padding: 15px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transform: translateY(-10px);
+        opacity: 0;
+        transition: transform 0.3s, opacity 0.3s;
+      }
+
+      nav ul.show {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      .search-filter {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .menu-selects {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .menu-selects select {
+        width: 100%;
+      }
+      
+      .container {
+        padding: 20px 5%;
+      }
+      
+      .ad-container {
+        padding: 15px 5%;
+      }
+
+      .course-actions {
+        grid-template-columns: 1fr;
+      }
+      
+      .course-header {
+        flex-direction: column;
+      }
+      
+      .course-code {
+        margin-left: 0;
+        margin-top: 8px;
+        align-self: flex-start;
+      }
+    }
+
+    /* ----- ACCESSIBILITY ----- */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <h1>TechnoEdu</h1>
+    <button class="menu-toggle" aria-label="Menu mobile" aria-expanded="false">
+      <span aria-hidden="true">☰</span>
+    </button>
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="cours.html" aria-current="page">Cours et TP</a></li>
+        <li><a href="ressources.html">Ressources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- CONTENU -->
+  <div class="container">
+    <h2>Télécharger les cours, TP, contrôles et EFM</h2>
+
+    <!-- Recherche et filtre -->
+    <div class="search-filter">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Rechercher un document...">
+      </div>
+      <div class="menu-selects">
+        <select id="genie">
+          <option value="all">-- Sélectionner le génie --</option>
+          <option value="mecanique">Génie mécanique</option>
+          <option value="electrique">Génie électrique</option>
+        </select>
+        <select id="matiere" disabled>
+          <option value="">-- Sélectionner la filière --</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Grille des cours -->
+    <div id="courses-grid" class="courses-grid">
+      <!-- Les cours seront générés ici par JavaScript -->
+    </div>
+  </div>
+
+  <!-- ADS -->
+  <div class="ad-container">
+    <p>Publicité</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 TechnoEdu | Tous droits réservés</p>
+  </footer>
+
+  <script>
+    // Base de données des cours avec liens de téléchargement
+    const coursData = {
+      FM: {
+        cours: [
+          { 
+            id: "m101", 
+            code: "M101", 
+            description: "Métier et formation dans le secteur de la mécanique", 
+            lien: "cours/cours_m101.pdf",
+            tp: "tp/tp_m101.zip",
+            controles: "controles/controle_m101.pdf",
+            efm: "efm/efm_m101.pdf"
+          },
+          { 
+            id: "m102", 
+            code: "M102", 
+            description: "Affûtage d'outils", 
+            lien: "cours/cours_m102.pdf",
+            tp: "tp/tp_m102.zip",
+            controles: "controles/controle_m102.pdf",
+            efm: "efm/efm_m102.pdf"
+          },
+          { 
+            id: "m103", 
+            code: "M103", 
+            description: "Fabrication des pièces d'usinage simples en tournage", 
+            lien: "cours/cours_m103.pdf",
+            tp: "tp/tp_m103.zip",
+            controles: "controles/controle_m103.pdf",
+            efm: "efm/efm_m103.pdf"
+          },
+          { 
+            id: "m104", 
+            code: "M104", 
+            description: "Fabrication des pièces d'usinage simples en fraisage", 
+            lien: "cours/cours_m104.pdf",
+            tp: "tp/tp_m104.zip",
+            controles: "controles/controle_m104.pdf",
+            efm: "efm/efm_m104.pdf"
+          },
+          { 
+            id: "m105", 
+            code: "M105", 
+            description: "Conduite d'une production de série", 
+            lien: "cours/cours_m105.pdf",
+            tp: "tp/tp_m105.zip",
+            controles: "controles/controle_m105.pdf",
+            efm: "efm/efm_m105.pdf"
+          },
+          { 
+            id: "m106", 
+            code: "M106", 
+            description: "Réglage et lancement d'une production de série", 
+            lien: "cours/cours_m106.pdf",
+            tp: "tp/tp_m106.zip",
+            controles: "controles/controle_m106.pdf",
+            efm: "efm/efm_m106.pdf"
+          },
+          { 
+            id: "m107", 
+            code: "M107", 
+            description: "Travaux d'établi et réalisation d'opérations de perçage et de taraudage", 
+            lien: "cours/cours_m107.pdf",
+            tp: "tp/tp_m107.zip",
+            controles: "controles/controle_m107.pdf",
+            efm: "efm/efm_m107.pdf"
+          },
+          { 
+            id: "m108", 
+            code: "M108", 
+            description: "Détermination des paramètres de coupe", 
+            lien: "cours/cours_m108.pdf",
+            tp: "tp/tp_m108.zip",
+            controles: "controles/controle_m108.pdf",
+            efm: "efm/efm_m108.pdf"
+          },
+          { 
+            id: "m109", 
+            code: "M109", 
+            description: "Définition d'un mode opératoire", 
+            lien: "cours/cours_m109.pdf",
+            tp: "tp/tp_m109.zip",
+            controles: "controles/controle_m109.pdf",
+            efm: "efm/efm_m109.pdf"
+          },
+          { 
+            id: "m110", 
+            code: "M110", 
+            description: "Technologie professionnelle", 
+            lien: "cours/cours_m110.pdf",
+            tp: "tp/tp_m110.zip",
+            controles: "controles/controle_m110.pdf",
+            efm: "efm/efm_m110.pdf"
+          },
+          { 
+            id: "m111", 
+            code: "M111", 
+            description: "Résistance des matériaux", 
+            lien: "cours/cours_m111.pdf",
+            tp: "tp/tp_m111.zip",
+            controles: "controles/controle_m111.pdf",
+            efm: "efm/efm_m111.pdf"
+          },
+          { 
+            id: "m112", 
+            code: "M112", 
+            description: "Méthodes de contrôle et de suivi de production", 
+            lien: "cours/cours_m112.pdf",
+            tp: "tp/tp_m112.zip",
+            controles: "controles/controle_m112.pdf",
+            efm: "efm/efm_m112.pdf"
+          },
+          { 
+            id: "m113", 
+            code: "M113", 
+            description: "Méthodes de contrôle et de suivi de production", 
+            lien: "cours/cours_m113.pdf",
+            tp: "tp/tp_m113.zip",
+            controles: "controles/controle_m113.pdf",
+            efm: "efm/efm_m113.pdf"
+          },
+          { 
+            id: "m114", 
+            code: "M114", 
+            description: "Représentation de pièces mécaniques en dessin industriel", 
+            lien: "cours/cours_m114.pdf",
+            tp: "tp/tp_m114.zip",
+            controles: "controles/controle_m114.pdf",
+            efm: "efm/efm_m114.pdf"
+          },
+          { 
+            id: "m115", 
+            code: "M115", 
+            description: "Métrologie dimensionnelle et géométrique", 
+            lien: "cours/cours_m115.pdf",
+            tp: "tp/tp_m115.zip",
+            controles: "controles/controle_m115.pdf",
+            efm: "efm/efm_m115.pdf"
+          },
+          { 
+            id: "m116", 
+            code: "M116", 
+            description: "Matériaux et traitements", 
+            lien: "cours/cours_m116.pdf",
+            tp: "tp/tp_m116.zip",
+            controles: "controles/controle_m116.pdf",
+            efm: "efm/efm_m116.pdf"
+          },
+          { 
+            id: "m117", 
+            code: "M117", 
+            description: "Mathématiques et mécanique appliquées", 
+            lien: "cours/cours_m117.pdf",
+            tp: "tp/tp_m117.zip",
+            controles: "controles/controle_m117.pdf",
+            efm: "efm/efm_m117.pdf"
+          },
+          { 
+            id: "m118", 
+            code: "M118", 
+            description: "Hygiène et sécurité au travail en fabrication Mécanique", 
+            lien: "cours/cours_m118.pdf",
+            tp: "tp/tp_m118.zip",
+            controles: "controles/controle_m118.pdf",
+            efm: "efm/efm_m118.pdf"
+          },
+          { 
+            id: "m119", 
+            code: "M119", 
+            description: "Entretien de l'état de fonctionnement du poste de travail", 
+            lien: "cours/cours_m119.pdf",
+            tp: "tp/tp_m119.zip",
+            controles: "controles/controle_m119.pdf",
+            efm: "efm/efm_m119.pdf"
+          },
+          { 
+            id: "m201", 
+            code: "M201", 
+            description: "Usinage complexe", 
+            lien: "cours/cours_m201.pdf",
+            tp: "tp/tp_m201.zip",
+            controles: "controles/controle_m201.pdf",
+            efm: "efm/efm_m201.pdf"
+          },
+          { 
+            id: "m202", 
+            code: "M202", 
+            description: "Fabrication d'une pièce de rénovation en mécanique générale", 
+            lien: "cours/cours_m202.pdf",
+            tp: "tp/tp_m202.zip",
+            controles: "controles/controle_m202.pdf",
+            efm: "efm/efm_m202.pdf"
+          },
+          { 
+            id: "m203", 
+            code: "M203", 
+            description: "Réalisation d'opérations de rectification", 
+            lien: "cours/cours_m203.pdf",
+            tp: "tp/tp_m203.zip",
+            controles: "controles/controle_m203.pdf",
+            efm: "efm/efm_m203.pdf"
+          },
+          { 
+            id: "m204", 
+            code: "M204", 
+            description: "Montage et réglage des ensembles mécaniques", 
+            lien: "cours/cours_m204.pdf",
+            tp: "tp/tp_m204.zip",
+            controles: "controles/controle_m204.pdf",
+            efm: "efm/efm_m204.pdf"
+          },
+          { 
+            id: "m205", 
+            code: "M205", 
+            description: "Dossier de fabrication", 
+            lien: "cours/cours_m205.pdf",
+            tp: "tp/tp_m205.zip",
+            controles: "controles/controle_m205.pdf",
+            efm: "efm/efm_m205.pdf"
+          },
+          { 
+            id: "m206", 
+            code: "M206", 
+            description: "Lecture et interprétation des plans, des documents techniques, des devis", 
+            lien: "cours/cours_m206.pdf",
+            tp: "tp/tp_m206.zip",
+            controles: "controles/controle_m206.pdf",
+            efm: "efm/efm_m206.pdf"
+          },
+          { 
+            id: "m207", 
+            code: "M207", 
+            description: "Maintenance des équipements", 
+            lien: "cours/cours_m207.pdf",
+            tp: "tp/tp_m207.zip",
+            controles: "controles/controle_m207.pdf",
+            efm: "efm/efm_m207.pdf"
+          },
+          { 
+            id: "m208", 
+            code: "M208", 
+            description: "CAO / FAO", 
+            lien: "cours/cours_m208.pdf",
+            tp: "tp/tp_m208.zip",
+            controles: "controles/controle_m208.pdf",
+            efm: "efm/efm_m208.pdf"
+          },
+          { 
+            id: "m209", 
+            code: "M209", 
+            description: "Gestion de production", 
+            lien: "cours/cours_m209.pdf",
+            tp: "tp/tp_m209.zip",
+            controles: "controles/controle_m209.pdf",
+            efm: "efm/efm_m209.pdf"
+          },
+          { 
+            id: "m210", 
+            code: "M210", 
+            description: "Démarche qualité", 
+            lien: "cours/cours_m210.pdf",
+            tp: "tp/tp_m210.zip",
+            controles: "controles/controle_m210.pdf",
+            efm: "efm/efm_m210.pdf"
+          },
+          { 
+            id: "m211", 
+            code: "M211", 
+            description: "Sensibilisation à la programmation et à la conduite des MOCN", 
+            lien: "cours/cours_m211.pdf",
+            tp: "tp/tp_m211.zip",
+            controles: "controles/controle_m211.pdf",
+            efm: "efm/efm_m211.pdf"
+          },
+          { 
+            id: "m212", 
+            code: "M212", 
+            description: "Projet de synthèse", 
+            lien: "cours/cours_m212.pdf",
+            tp: "tp/tp_m212.zip",
+            controles: "controles/controle_m212.pdf",
+            efm: "efm/efm_m212.pdf"
+          }
+        ]
+      },
+      MFM: {
+        cours: [
+          { 
+            id: "mfm101", 
+            code: "M101", 
+            description: "Fabrication des pièces d'usinage simples en tournage", 
+            lien: "cours/mfm/cours_mfm101.pdf",
+            tp: "tp/mfm/tp_mfm101.zip",
+            controles: "controles/mfm/controle_mfm101.pdf",
+            efm: "efm/mfm/efm_mfm101.pdf"
+          },
+          { 
+            id: "mfm102", 
+            code: "M102", 
+            description: "Fabrication des pièces d'usinage simples en fraisage", 
+            lien: "cours/mfm/cours_mfm102.pdf",
+            tp: "tp/mfm/tp_mfm102.zip",
+            controles: "controles/mfm/controle_mfm102.pdf",
+            efm: "efm/mfm/efm_mfm102.pdf"
+          },
+          { 
+            id: "mfm103", 
+            code: "M103", 
+            description: "Analyse de fabrication et gammes d'usinage", 
+            lien: "cours/mfm/cours_mfm103.pdf",
+            tp: "tp/mfm/tp_mfm103.zip",
+            controles: "controles/mfm/controle_mfm103.pdf",
+            efm: "efm/mfm/efm_mfm103.pdf"
+          },
+          { 
+            id: "mfm104", 
+            code: "M104", 
+            description: "Matériaux, Procédés de mise en forme, Traitements", 
+            lien: "cours/mfm/cours_mfm104.pdf",
+            tp: "tp/mfm/tp_mfm104.zip",
+            controles: "controles/mfm/controle_mfm104.pdf",
+            efm: "efm/mfm/efm_mfm104.pdf"
+          },
+          { 
+            id: "mfm105", 
+            code: "M105", 
+            description: "Définition et Cotation fonctionnelle des pièces mécaniques", 
+            lien: "cours/mfm/cours_mfm105.pdf",
+            tp: "tp/mfm/tp_mfm105.zip",
+            controles: "controles/mfm/controle_mfm105.pdf",
+            efm: "efm/mfm/efm_mfm105.pdf"
+          },
+          { 
+            id: "mfm106", 
+            code: "M106", 
+            description: "Electricité industrielle", 
+            lien: "cours/mfm/cours_mfm106.pdf",
+            tp: "tp/mfm/tp_mfm106.zip",
+            controles: "controles/mfm/controle_mfm106.pdf",
+            efm: "efm/mfm/efm_mfm106.pdf"
+          },
+          { 
+            id: "mfm107", 
+            code: "M107", 
+            description: "Systèmes automatisés", 
+            lien: "cours/mfm/cours_mfm107.pdf",
+            tp: "tp/mfm/tp_mfm107.zip",
+            controles: "controles/mfm/controle_mfm107.pdf",
+            efm: "efm/mfm/efm_mfm107.pdf"
+          },
+          { 
+            id: "mfm108", 
+            code: "M108", 
+            description: "Représentation de pièces mécaniques en dessin industriel", 
+            lien: "cours/mfm/cours_mfm108.pdf",
+            tp: "tp/mfm/tp_mfm108.zip",
+            controles: "controles/mfm/controle_mfm108.pdf",
+            efm: "efm/mfm/efm_mfm108.pdf"
+          },
+          { 
+            id: "mfm109", 
+            code: "M109", 
+            description: "Métrologie dimensionnelle et géométrique", 
+            lien: "cours/mfm/cours_mfm109.pdf",
+            tp: "tp/mfm/tp_mfm109.zip",
+            contraires: "controles/mfm/controle_mfm109.pdf",
+            efm: "efm/mfm/efm_mfm109.pdf"
+          },
+          { 
+            id: "mfm110", 
+            code: "M110", 
+            description: "Mathématiques et mécanique appliquées", 
+            lien: "cours/mfm/cours_mfm110.pdf",
+            tp: "tp/mfm/tp_mfm110.zip",
+            controles: "controles/mfm/controle_mfm110.pdf",
+            efm: "efm/mfm/efm_mfm110.pdf"
+          },
+          { 
+            id: "mfm111", 
+            code: "M111", 
+            description: "Résistance des matériaux", 
+            lien: "cours/mfm/cours_mfm111.pdf",
+            tp: "tp/mfm/tp_mfm111.zip",
+            controles: "controles/mfm/controle_mfm111.pdf",
+            efm: "efm/mfm/efm_mfm111.pdf"
+          },
+          { 
+            id: "mfm112", 
+            code: "M112", 
+            description: "Application des principes fondamentaux en mécanique des fluides et thermique", 
+            lien: "cours/mfm/cours_mfm112.pdf",
+            tp: "tp/mfm/tp_mfm112.zip",
+            controles: "controles/mfm/controle_mfm112.pdf",
+            efm: "efm/mfm/efm_mfm112.pdf"
+          },
+          { 
+            id: "mfm113", 
+            code: "M113", 
+            description: "Hygiène et sécurité au travail en fabrication Mécanique", 
+            lien: "cours/mfm/cours_mfm113.pdf",
+            tp: "tp/mfm/tp_mfm113.zip",
+            controles: "controles/mfm/controle_mfm113.pdf",
+            efm: "efm/mfm/efm_mfm113.pdf"
+          },
+          { 
+            id: "mfm114", 
+            code: "M114", 
+            description: "Métier et formation dans le secteur de la mécanique", 
+            lien: "cours/mfm/cours_mfm114.pdf",
+            tp: "tp/mfm/tp_mfm114.zip",
+            controles: "controles/mfm/controle_mfm114.pdf",
+            efm: "efm/mfm/efm_mfm114.pdf"
+          },
+          { 
+            id: "mfm201", 
+            code: "M201", 
+            description: "Analyse de produits et gamme de montage", 
+            lien: "cours/mfm/cours_mfm201.pdf",
+            tp: "tp/mfm/tp_mfm201.zip",
+            controles: "controles/mfm/controle_mfm201.pdf",
+            efm: "efm/mfm/efm_mfm201.pdf"
+          },
+          { 
+            id: "mfm202", 
+            code: "M202", 
+            description: "Détermination des temps de fabrication", 
+            lien: "cours/mfm/cours_mfm202.pdf",
+            tp: "tp/mfm/tp_mfm202.zip",
+            controles: "controles/mfm/controle_mfm202.pdf",
+            efm: "efm/mfm/efm_mfm202.pdf"
+          },
+          { 
+            id: "mfm203", 
+            code: "M203", 
+            description: "Élaboration et Constitution des dossiers de fabrication", 
+            lien: "cours/mfm/cours_mfm203.pdf",
+            tp: "tp/mfm/tp_mfm203.zip",
+            controles: "controles/mfm/controle_mfm203.pdf",
+            efm: "efm/mfm/efm_mfm203.pdf"
+          },
+          { 
+            id: "mfm204", 
+            code: "M204", 
+            description: "Statistiques en production", 
+            lien: "cours/mfm/cours_mfm204.pdf",
+            tp: "tp/mfm/tp_mfm204.zip",
+            controles: "controles/mfm/controle_mfm204.pdf",
+            efm: "efm/mfm/efm_mfm204.pdf"
+          },
+          { 
+            id: "mfm205", 
+            code: "M205", 
+            description: "Gestion de la production", 
+            lien: "cours/mfm/cours_mfm205.pdf",
+            tp: "tp/mfm/tp_mfm205.zip",
+            controles: "controles/mfm/controle_mfm205.pdf",
+            efm: "efm/mfm/efm_mfm205.pdf"
+          },
+          { 
+            id: "mfm206", 
+            code: "M206", 
+            description: "Conception et Dessin d'outillages de production", 
+            lien: "cours/mfm/cours_mfm206.pdf",
+            tp: "tp/mfm/tp_mfm206.zip",
+            controles: "controles/mfm/controle_mfm206.pdf",
+            efm: "efm/mfm/efm_mfm206.pdf"
+          },
+          { 
+            id: "mfm207", 
+            code: "M207", 
+            description: "Calcul du prix de revient industriel et établissement du devis", 
+            lien: "cours/mfm/cours_mfm207.pdf",
+            tp: "tp/mfm/tp_mfm207.zip",
+            controles: "controles/mfm/controle_mfm207.pdf",
+            efm: "efm/mfm/efm_mfm207.pdf"
+          },
+          { 
+            id: "mfm208", 
+            code: "M208", 
+            description: "Optimisation et amélioration de la production", 
+            lien: "cours/mfm/cours_mfm208.pdf",
+            tp: "tp/mfm/tp_mfm208.zip",
+            controles: "controles/mfm/controle_mfm208.pdf",
+            efm: "efm/mfm/efm_mfm208.pdf"
+          },
+          { 
+            id: "mfm209", 
+            code: "M209", 
+            description: "Programmation, réglage et conduite des MOCN", 
+            lien: "cours/mfm/cours_mfm209.pdf",
+            tp: "tp/mfm/tp_mfm209.zip",
+            controles: "controles/mfm/controle_mfm209.pdf",
+            efm: "efm/mfm/efm_mfm209.pdf"
+          },
+          { 
+            id: "mfm210", 
+            code: "M210", 
+            description: "Conduite et gestion de projets d'industrialisation", 
+            lien: "cours/mfm/cours_mfm210.pdf",
+            tp: "tp/mfm/tp_mfm210.zip",
+            controles: "controles/mfm/controle_mfm210.pdf",
+            efm: "efm/mfm/efm_mfm210.pdf"
+          },
+          { 
+            id: "mfm211", 
+            code: "M211", 
+            description: "CAO / FAO", 
+            lien: "cours/mfm/cours_mfm211.pdf",
+            tp: "tp/mfm/tp_mfm211.zip",
+            controles: "controles/mfm/controle_mfm211.pdf",
+            efm: "efm/mfm/efm_mfm211.pdf"
+          },
+          { 
+            id: "mfm212", 
+            code: "M212", 
+            description: "Démarche qualité", 
+            lien: "cours/mfm/cours_mfm212.pdf",
+            tp: "tp/mfm/tp_mfm212.zip",
+            controles: "controles/mfm/controle_mfm212.pdf",
+            efm: "efm/mfm/efm_mfm212.pdf"
+          }
+        ]
+      },
+      CM: {
+        cours: [
+          { 
+            id: "cm101", 
+            code: "M101", 
+            description: "Métier et formation en construction métallique", 
+            lien: "cours/cm/cours_cm101.pdf",
+            tp: "tp/cm/tp_cm101.zip",
+            controles: "controles/cm/controle_cm101.pdf",
+            efm: "efm/cm/efm_cm101.pdf"
+          },
+          { 
+            id: "cm102", 
+            code: "M102", 
+            description: "Hygiène et sécurité au travail en construction Métallique", 
+            lien: "cours/cm/cours_cm102.pdf",
+            tp: "tp/cm/tp_cm102.zip",
+            controles: "controles/cm/controle_cm102.pdf",
+            efm: "efm/cm/efm_cm102.pdf"
+          },
+          { 
+            id: "cm103", 
+            code: "M103", 
+            description: "Technologie professionnelle", 
+            lien: "cours/cm/cours_cm103.pdf",
+            tp: "tp/cm/tp_cm103.zip",
+            controles: "controles/cm/controle_cm103.pdf",
+            efm: "efm/cm/efm_cm103.pdf"
+          },
+          { 
+            id: "cm104", 
+            code: "M104", 
+            description: "Lire et décoder des plans industriels", 
+            lien: "cours/cm/cours_cm104.pdf",
+            tp: "tp/cm/tp_cm104.zip",
+            controles: "controles/cm/controle_cm104.pdf",
+            efm: "efm/cm/efm_cm104.pdf"
+          },
+          { 
+            id: "cm105", 
+            code: "M105", 
+            description: "Traçage graphique", 
+            lien: "cours/cm/cours_cm105.pdf",
+            tp: "tp/cm/tp_cm105.zip",
+            controles: "controles/cm/controle_cm105.pdf",
+            efm: "efm/cm/efm_cm105.pdf"
+          },
+          { 
+            id: "cm106", 
+            code: "M106", 
+            description: "Mathématiques appliquées", 
+            lien: "cours/cm/cours_cm106.pdf",
+            tp: "tp/cm/tp_cm106.zip",
+            controles: "controles/cm/controle_cm106.pdf",
+            efm: "efm/cm/efm_cm106.pdf"
+          },
+          { 
+            id: "cm107", 
+            code: "M107", 
+            description: "Élaboration des gammes de fabrication et de montage", 
+            lien: "cours/cm/cours_cm107.pdf",
+            tp: "tp/cm/tp_cm107.zip",
+            controles: "controles/cm/controle_cm107.pdf",
+            efm: "efm/cm/efm_cm107.pdf"
+          },
+          { 
+            id: "cm108", 
+            code: "M108", 
+            description: "Préparation, fabrication et assemblage d'ouvrages chaudronnés et de structures métalliques simples", 
+            lien: "cours/cm/cours_cm108.pdf",
+            tp: "tp/cm/tp_cm108.zip",
+            controles: "controles/cm/controle_cm108.pdf",
+            efm: "efm/cm/efm_cm108.pdf"
+          },
+          { 
+            id: "cm109", 
+            code: "M109", 
+            description: "Maintenir et entretenir le poste de travail", 
+            lien: "cours/cm/cours_cm109.pdf",
+            tp: "tp/cm/tp_cm109.zip",
+            controles: "controles/cm/controle_cm109.pdf",
+            efm: "efm/cm/efm_cm109.pdf"
+          },
+          { 
+            id: "cm110", 
+            code: "M110", 
+            description: "Manutention, levage, gestes et postures", 
+            lien: "cours/cm/cours_cm110.pdf",
+            tp: "tp/cm/tp_cm110.zip",
+            controles: "controles/cm/controle_cm110.pdf",
+            efm: "efm/cm/efm_cm110.pdf"
+          },
+          { 
+            id: "cm201", 
+            code: "M201", 
+            description: "Traçage par calcul", 
+            lien: "cours/cm/cours_cm201.pdf",
+            tp: "tp/cm/tp_cm201.zip",
+            controles: "controles/cm/controle_cm201.pdf",
+            efm: "efm/cm/efm_cm201.pdf"
+          },
+          { 
+            id: "cm202", 
+            code: "M202", 
+            description: "Mécanique appliquée et résistance des matériaux", 
+            lien: "cours/cm/cours_cm202.pdf",
+            tp: "tp/cm/tp_cm202.zip",
+            contraires: "controles/cm/controle_cm202.pdf",
+            efm: "efm/cm/efm_cm202.pdf"
+          },
+          { 
+            id: "cm203", 
+            code: "M203", 
+            description: "Organisation et planification des tâques", 
+            lien: "cours/cm/cours_cm203.pdf",
+            tp: "tp/cm/tp_cm203.zip",
+            controles: "controles/cm/controle_cm203.pdf",
+            efm: "efm/cm/efm_cm203.pdf"
+          },
+          { 
+            id: "cm204", 
+            code: "M204", 
+            description: "Programmation et mise en œuvre des outils de production à commande numérique", 
+            lien: "cours/cm/cours_cm204.pdf",
+            tp: "tp/cm/tp_cm204.zip",
+            controles: "controles/cm/controle_cm204.pdf",
+            efm: "efm/cm/efm_cm204.pdf"
+          },
+          { 
+            id: "cm205", 
+            code: "M205", 
+            description: "Utilisation des logiciels DAO, TAO, CFAO", 
+            lien: "cours/cm/cours_cm205.pdf",
+            tp: "tp/cm/tp_cm205.zip",
+            controles: "controles/cm/controle_cm205.pdf",
+            efm: "efm/cm/efm_cm205.pdf"
+          },
+          { 
+            id: "cm206", 
+            code: "M206", 
+            description: "Contrôle, suivi de fabrication en atelier et sur chantier", 
+            lien: "cours/cm/cours_cm206.pdf",
+            tp: "tp/cm/tp_cm206.zip",
+            controles: "controles/cm/controle_cm206.pdf",
+            efm: "efm/cm/efm_cm206.pdf"
+          },
+          { 
+            id: "cm207", 
+            code: "M207", 
+            description: "Préparation, fabrication et assemblage d'ouvrages chaudronnés et de structures métalliques complexes", 
+            lien: "cours/cm/cours_cm207.pdf",
+            tp: "tp/cm/tp_cm207.zip",
+            controles: "controles/cm/controle_cm207.pdf",
+            efm: "efm/cm/efm_cm207.pdf"
+          },
+          { 
+            id: "cm209", 
+            code: "M209", 
+            description: "Démarche qualité", 
+            lien: "cours/cm/cours_cm209.pdf",
+            tp: "tp/cm/tp_cm209.zip",
+            controles: "controles/cm/controle_cm209.pdf",
+            efm: "efm/cm/efm_cm209.pdf"
+          }
+        ]
+      },
+      ESA: {
+        cours: [
+          { 
+            id: "esa101", 
+            code: "M101", 
+            description: "Métier et formation", 
+            lien: "cours/esa/cours_esa101.pdf",
+            tp: "tp/esa/tp_esa101.zip",
+            controles: "controles/esa/controle_esa101.pdf",
+            efm: "efm/esa/efm_esa101.pdf"
+          },
+          { 
+            id: "esa102", 
+            code: "M102", 
+            description: "Interprétation de plans, de schémas et de devis", 
+            lien: "cours/esa/cours_esa102.pdf",
+            tp: "tp/esa/tp_esa102.zip",
+            controles: "controles/esa/controle_esa102.pdf",
+            efm: "efm/esa/efm_esa102.pdf"
+          },
+          { 
+            id: "esa103", 
+            code: "M103", 
+            description: "Hygiène, Sécurité et Environnement", 
+            lien: "cours/esa/cours_esa103.pdf",
+            tp: "tp/esa/tp_esa103.zip",
+            controles: "controles/esa/controle_esa103.pdf",
+            efm: "efm/esa/efm_esa103.pdf"
+          },
+          { 
+            id: "esa104", 
+            code: "M104", 
+            description: "Analyse de circuits à c.c.", 
+            lien: "cours/esa/cours_esa104.pdf",
+            tp: "tp/esa/tp_esa104.zip",
+            controles: "controles/esa/controle_esa104.pdf",
+            efm: "efm/esa/efm_esa104.pdf"
+          },
+          { 
+            id: "esa105", 
+            code: "M105", 
+            description: "Analyse de circuits à c.a.", 
+            lien: "cours/esa/cours_esa105.pdf",
+            tp: "tp/esa/tp_esa105.zip",
+            controles: "controles/esa/controle_esa105.pdf",
+            efm: "efm/esa/efm_esa105.pdf"
+          },
+          { 
+            id: "esa106", 
+            code: "M106", 
+            description: "Installation de canalisations électriques", 
+            lien: "cours/esa/cours_esa106.pdf",
+            tp: "tp/esa/tp_esa106.zip",
+            controles: "controles/esa/controle_esa106.pdf",
+            efm: "efm/esa/efm_esa106.pdf"
+          },
+          { 
+            id: "esa107", 
+            code: "M107", 
+            description: "Oxycoupage et soudage à l'arc électrique", 
+            lien: "cours/esa/cours_esa107.pdf",
+            tp: "tp/esa/tp_esa107.zip",
+            contraires: "controles/esa/controle_esa107.pdf",
+            efm: "efm/esa/efm_esa107.pdf"
+          },
+          { 
+            id: "esa108", 
+            code: "M108", 
+            description: "Gestion de la maintenance", 
+            lien: "cours/esa/cours_esa108.pdf",
+            tp: "tp/esa/tp_esa108.zip",
+            controles: "controles/esa/controle_esa108.pdf",
+            efm: "efm/esa/efm_esa108.pdf"
+          },
+          { 
+            id: "esa109", 
+            code: "M109", 
+            description: "Analyse de circuits à semi-conducteurs", 
+            lien: "cours/esa/cours_esa109.pdf",
+            tp: "tp/esa/tp_esa109.zip",
+            controles: "controles/esa/controle_esa109.pdf",
+            efm: "efm/esa/efm_esa109.pdf"
+          },
+          { 
+            id: "esa110", 
+            code: "M110", 
+            description: "Analyse de circuits pneumatiques", 
+            lien: "cours/esa/cours_esa110.pdf",
+            tp: "tp/esa/tp_esa110.zip",
+            controles: "controles/esa/controle_esa110.pdf",
+            efm: "efm/esa/efm_esa110.pdf"
+          },
+          { 
+            id: "esa111", 
+            code: "M111", 
+            description: "Usinage manuel", 
+            lien: "cours/esa/cours_esa111.pdf",
+            tp: "tp/esa/tp_esa111.zip",
+            controles: "controles/esa/controle_esa111.pdf",
+            efm: "efm/esa/efm_esa111.pdf"
+          },
+          { 
+            id: "esa112", 
+            code: "M112", 
+            description: "Usinage sur machines outils", 
+            lien: "cours/esa/cours_esa112.pdf",
+            tp: "tp/esa/tp_esa112.zip",
+            controles: "controles/esa/controle_esa112.pdf",
+            efm: "efm/esa/efm_esa112.pdf"
+          },
+          { 
+            id: "esa113", 
+            code: "M113", 
+            description: "Sensibilisation à la qualité", 
+            lien: "cours/esa/cours_esa113.pdf",
+            tp: "tp/esa/tp_esa113.zip",
+            controles: "controles/esa/controle_esa113.pdf",
+            efm: "efm/esa/efm_esa113.pdf"
+          },
+          { 
+            id: "esa114", 
+            code: "M114", 
+            description: "Dépannage de circuits électroniques de puissance", 
+            lien: "cours/esa/cours_esa114.pdf",
+            tp: "tp/esa/tp_esa114.zip",
+            controles: "controles/esa/controle_esa114.pdf",
+            efm: "efm/esa/efm_esa114.pdf"
+          },
+          { 
+            id: "esa115", 
+            code: "M115", 
+            description: "Alignement conventionnel", 
+            lien: "cours/esa/cours_esa115.pdf",
+            tp: "tp/esa/tp_esa115.zip",
+            controles: "controles/esa/controle_esa115.pdf",
+            efm: "efm/esa/efm_esa115.pdf"
+          },
+          { 
+            id: "esa116", 
+            code: "M116", 
+            description: "Montage et ajustement d'arbres, de roulements et de coussinets", 
+            lien: "cours/esa/cours_esa116.pdf",
+            tp: "tp/esa/tp_esa116.zip",
+            controles: "controles/esa/controle_esa116.pdf",
+            efm: "efm/esa/efm_esa116.pdf"
+          },
+          { 
+            id: "esa201", 
+            code: "M201", 
+            description: "Logique combinatoire", 
+            lien: "cours/esa/cours_esa201.pdf",
+            tp: "tp/esa/tp_esa201.zip",
+            controles: "controles/esa/controle_esa201.pdf",
+            efm: "efm/esa/efm_esa201.pdf"
+          },
+          { 
+            id: "esa202", 
+            code: "M202", 
+            description: "Logique séquentielle", 
+            lien: "cours/esa/cours_esa202.pdf",
+            tp: "tp/esa/tp_esa202.zip",
+            controles: "controles/esa/controle_esa202.pdf",
+            efm: "efm/esa/efm_esa202.pdf"
+          },
+          { 
+            id: "esa203", 
+            code: "M203", 
+            description: "Installation et réparation de moteurs et de génératrices à c. c.", 
+            lien: "cours/esa/cours_esa203.pdf",
+            tp: "tp/esa/tp_esa203.zip",
+            controles: "controles/esa/controle_esa203.pdf",
+            efm: "efm/esa/efm_esa203.pdf"
+          },
+          { 
+            id: "esa204", 
+            code: "M204", 
+            description: "Accessoires de transmission et de transformation du mouvement", 
+            lien: "cours/esa/cours_esa204.pdf",
+            tp: "tp/esa/tp_esa204.zip",
+            controles: "controles/esa/controle_esa204.pdf",
+            efm: "efm/esa/efm_esa204.pdf"
+          },
+          { 
+            id: "esa205", 
+            code: "M205", 
+            description: "Installation et réparation de moteurs et de génératrices à c. a.", 
+            lien: "cours/esa/cours_esa205.pdf",
+            tp: "tp/esa/tp_esa205.zip",
+            controles: "controles/esa/controle_esa205.pdf",
+            efm: "efm/esa/efm_esa205.pdf"
+          },
+          { 
+            id: "esa206", 
+            code: "M206", 
+            description: "Transmissions mécaniques", 
+            lien: "cours/esa/cours_esa206.pdf",
+            tp: "tp/esa/tp_esa206.zip",
+            controles: "controles/esa/controle_esa206.pdf",
+            efm: "efm/esa/efm_esa206.pdf"
+          },
+          { 
+            id: "esa207", 
+            code: "M207", 
+            description: "Utilisation de l'automate programmable", 
+            lien: "cours/esa/cours_esa207.pdf",
+            tp: "tp/esa/tp_esa207.zip",
+            controles: "controles/esa/controle_esa207.pdf",
+            efm: "efm/esa/efm_esa207.pdf"
+          },
+          { 
+            id: "esa208", 
+            code: "M208", 
+            description: "Circuits hydrauliques", 
+            lien: "cours/esa/cours_esa208.pdf",
+            tp: "tp/esa/tp_esa208.zip",
+            controles: "controles/esa/controle_esa208.pdf",
+            efm: "efm/esa/efm_esa208.pdf"
+          },
+          { 
+            id: "esa209", 
+            code: "M209", 
+            description: "Installation, réparation : commande électronique de moteurs", 
+            lien: "cours/esa/cours_esa209.pdf",
+            tp: "tp/esa/tp_esa209.zip",
+            controles: "controles/esa/controle_esa209.pdf",
+            efm: "efm/esa/efm_esa209.pdf"
+          },
+          { 
+            id: "esa210", 
+            code: "M210", 
+            description: "Installation, dépannage : instrumentation industrielle", 
+            lien: "cours/esa/cours_esa极.pdf",
+            tp: "tp/esa/tp_esa210.zip",
+            controles: "controles/esa/controle_esa210.pdf",
+            efm: "efm/esa/efm_esa210.pdf"
+          },
+          { 
+            id: "esa211", 
+            code: "M211", 
+            description: "Système automatisé contrôlé par API", 
+            lien: "cours/esa/cours_esa211.pdf",
+            tp: "tp/esa/tp_esa211.zip",
+            controles: "controles/esa/controle_esa211.pdf",
+            efm: "efm/esa/efm_esa211.pdf"
+          }
+        ]
+      },
+      AII: {
+        cours: [
+          { 
+            id: "aii101", 
+            code: "M101", 
+            description: "Métier et formation", 
+            lien: "cours/aii/cours_aii101.pdf",
+            tp: "tp/aii/tp_aii101.zip",
+            controles: "controles/aii/controle_aii101.pdf",
+            efm: "efm/aii/efm_aii101.pdf"
+          },
+          { 
+            id: "aii102", 
+            code: "M102", 
+            description: "Circuits électriques", 
+            lien: "cours/aii/cours_aii102.pdf",
+            tp: "tp/aii/tp_aii102.zip",
+            controles: "controles/aii/controle_aii102.pdf",
+            efm: "efm/aii/efm_aii102.pdf"
+          },
+          { 
+            id: "aii103", 
+            code: "M103", 
+            description: "Circuits électroniques", 
+            lien: "cours/aii/cours_aii103.pdf",
+            tp: "tp/aii/tp_aii103.zip",
+            controles: "controles/aii/controle_aii103.pdf",
+            efm: "efm/aii/efm_aii103.pdf"
+          },
+          { 
+            id: "aii104", 
+            code: "M104", 
+            description: "Systèmes logiques et numériques", 
+            lien: "cours/aii/cours_aii104.pdf",
+            tp: "tp/aii/tp_aii104.zip",
+            controles: "controles/aii/controle_aii104.pdf",
+            efm: "efm/aii/efm_aii104.pdf"
+          },
+          { 
+            id: "aii105", 
+            code: "M105", 
+            description: "Travaux de réalisation I", 
+            lien: "cours/aii/cours_aii105.pdf",
+            tp: "tp/aii/tp_aii105.zip",
+            controles: "controles/aii/controle_aii105.pdf",
+            efm: "efm/aii/efm_aii105.pdf"
+          },
+          { 
+            id: "aii106", 
+            code: "M106", 
+            description: "Traitement de signal", 
+            lien: "cours/aii/cours_aii106.pdf",
+            tp: "tp/aii/tp_aii106.zip",
+            controles: "controles/aii/controle_aii106.pdf",
+            efm: "efm/aii/efm_aii106.pdf"
+          },
+          { 
+            id: "aii107", 
+            code: "M107", 
+            description: "Circuits de puissance", 
+            lien: "cours/aii/cours_ai极107.pdf",
+            tp: "tp/aii/tp_aii107.zip",
+            controles: "controles/aii/controle_aii107.pdf",
+            efm: "efm/aii/efm_aii107.pdf"
+          },
+          { 
+            id: "aii108", 
+            code: "M108", 
+            description: "Travaux de réalisation II", 
+            lien: "cours/aii/cours_aii108.pdf",
+            tp: "tp/ai极/tp_aii108.zip",
+            controles: "controles/aii/controle_aii108.pdf",
+            efm: "efm/aii/efm_aii108.pdf"
+          },
+          { 
+            id: "aii109", 
+            code: "M109", 
+            description: "Microcontrôleurs", 
+            lien: "cours/aii/cours_aii109.pdf",
+            tp: "tp/aii/tp_aii109.zip",
+            controles: "controles/aii/controle_aii109.pdf",
+            efm: "efm/aii/efm_ai极109.pdf"
+          },
+          { 
+            id: "aii201", 
+            code: "M201", 
+            description: "Automates programmables I", 
+            lien: "cours/aii/cours_aii201.pdf",
+            tp: "tp/aii/tp_aii201.zip",
+            controles: "controles/aii/controle_aii201.pdf",
+            efm: "efm/aii/efm_aii201.pdf"
+          },
+          { 
+            id: "aii202", 
+            code: "M202", 
+            description: "Commande électrique des machines", 
+            lien: "cours/aii/cours_aii202.pdf",
+            tp: "tp/aii/tp_aii202.zip",
+            controles: "controles/aii/controle_aii202.pdf",
+            efm: "极/aii/efm_aii202.pdf"
+          },
+          { 
+            id: "aii203", 
+            code: "M203", 
+            description: "Capteurs et conditionneurs", 
+            lien: "cours/aii/cours_aii203.pdf",
+            tp: "tp/aii/t极_aii203.zip",
+            controles: "controles/aii/controle_aii203.pdf",
+            efm: "efm/aii/efm_aii203.pdf"
+          },
+          { 
+            id: "aii204", 
+            code: "M204", 
+            description: "Contrôleurs", 
+            lien: "cours/aii/cours_aii204.pdf",
+            tp: "tp/aii/tp_aii204.zip",
+            controles: "controles/aii/controle_aii204.pdf",
+            efm: "efm/aii/efm_aii204.pdf"
+          },
+          { 
+            id: "aii205", 
+            code: "M205", 
+            description: "Hydraulique, Pneumatique et Mécanique", 
+            lien: "cours/aii/cours_aii205.pdf",
+            tp: "tp/aii/tp_aii205.zip",
+            controles: "controles/aii/controle_aii205.pdf",
+            ef极: "efm/aii/efm_aii205.pdf"
+          },
+          { 
+            id: "aii206", 
+            code: "M206", 
+            description: "Automates programmables II", 
+            lien: "cours/aii/cours_aii206.pdf",
+            tp: "tp/aii/tp_aii206.zip",
+            controles: "controles/aii/controle_aii206.pdf",
+            efm: "efm/aii/efm_aii206.pdf"
+          },
+          { 
+            id: "aii207", 
+            code: "M207", 
+            description: "Commande électronique des machines électriques", 
+            lien: "cours/aii/cours_aii207.pdf",
+            tp: "tp/aii/tp_aii207.zip",
+            controles: "controles/aii/controle_aii207.pdf",
+            efm: "efm/aii/efm_aii207.pdf"
+          },
+          { 
+            id: "aii208", 
+            code: "M208", 
+            description: "Régulation P.I.D", 
+            lien: "cours/aii/cours_aii208.pdf",
+            tp: "tp/aii/tp_aii208.zip",
+            controles: "controles/aii/controle_aii208.pdf",
+            efm: "efm/aii/efm_aii208.pdf"
+          },
+          { 
+            id: "aii209", 
+            code: "M209", 
+            description: "Supervision", 
+            lien: "cours/aii/cours_aii209.pdf",
+            tp: "tp/aii/tp_aii209.zip",
+            controles: "controles/aii/controle_aii209.pdf",
+            efm: "efm/aii/efm_aii209.pdf"
+          },
+          { 
+            id: "aii210", 
+            code: "M210", 
+            description: "Sensibilisation à la qualité", 
+            lien: "cours/aii/cours_aii210.pdf",
+            tp: "tp/aii/tp_aii210.zip",
+            controles: "controles/aii/controle_aii210.pdf",
+            efm: "efm/aii/efm_aii210极.pdf"
+          }
+        ]
+      },
+      EMI: {
+        cours: [
+          { 
+            id: "cours-emi1", 
+            code: "EMI1", 
+            description: "Électrotechnique et maintenance industrielle", 
+            lien: "cours/cours_emi1.pdf",
+            tp: "tp/tp_emi1.zip",
+            controles: "controles/controle_emi1.pdf",
+            efm: "efm/efm_emi1.pdf"
+          }
+        ]
+      }
+    };
+
+    // Nouvelles filières
+    const filieresData = {
+      mecanique: [
+        { value: "FM", label: "FM" },
+        { value: "MFM", label: "MFM" },
+        { value: "CM", label: "CM" }
+      ],
+      electrique: [
+        { value: "ESA", label: "ESA" },
+        { value: "AII", label: "AII" },
+        { value: "EMI", label: "EMI" }
+      ]
+    };
+
+    const matiereSelect = document.getElementById("matiere");
+    const genieSelect = document.getElementById("genie");
+    const searchInput = document.getElementById("search-input");
+    const coursesGrid = document.getElementById("courses-grid");
+
+    // Mettre à jour la liste des filières
+    function majFilieres() {
+      const genie = genieSelect.value;
+      matiereSelect.innerHTML = "";
+      const optionDefaut = document.createElement("option");
+      optionDefaut.value = "";
+      optionDefaut.textContent = "-- Sélectionner la filière --";
+      matiereSelect.appendChild(optionDefaut);
+
+      if (genie !== "all" && filieresData[genie]) {
+        matiereSelect.disabled = false;
+        filieresData[genie].forEach(f => {
+          const opt = document.createElement("option");
+          opt.value = f.value;
+          opt.textContent = f.label;
+          matiereSelect.appendChild(opt);
+        });
+      } else {
+        matiereSelect.disabled = true;
+      }
+      afficherCours(""); // vider docs quand on change de génie
+    }
+
+    // Génération carte de cours
+    function creerCarte(cours) {
+      const div = document.createElement("div");
+      div.classList.add("course-card");
+      
+      div.innerHTML = `
+        <div class="course-header">
+          <div class="course-title">${cours.description}</div>
+          <div class="course-code">${cours.code}</div>
+        </div>
+        <div class="course-actions">
+          <div class="action-group">
+            <a href="${cours.lien}" download class="action-button">
+              <span>📘</span> Cours
+            </a>
+            <a href="${cours.tp}" download class="action-button">
+              <span>🛠️</span> TP
+            </a>
+          </div>
+          <div class="action-group">
+            <a href="${cours.controles}" download class="action-button">
+              <span>📑</span> Contrôles
+            </a>
+            <a href="${cours.efm}" download class="action-button">
+              <span>📝</span> EFM
+            </a>
+          </div>
+        </div>
+      `;
+      
+      return div;
+    }
+
+    // Affichage des cours
+    function afficherCours(matiere) {
+      coursesGrid.innerHTML = "";
+
+      if (!matiere || !coursData[matiere]) {
+        coursesGrid.innerHTML = '<p class="empty-state">Sélectionnez une filière pour afficher les cours</p>';
+        return;
+      }
+
+      coursData[matiere].cours.forEach(c => {
+        coursesGrid.appendChild(creerCarte(c));
+      });
+    }
+
+    // Filtrage recherche
+    function filtrerCours() {
+      const matiere = matiereSelect.value;
+      const searchTerm = searchInput.value.toLowerCase();
+
+      if (!matiere) {
+        coursesGrid.innerHTML = '<p class="empty-state">Sélectionnez une filière pour afficher les cours</p>';
+        return;
+      }
+
+      let data = coursData[matiere];
+      let coursFiltres = data.cours.filter(c => 
+        c.description.toLowerCase().includes(searchTerm) ||
+        c.code.toLowerCase().includes(searchTerm)
+      );
+
+      coursesGrid.innerHTML = "";
+
+      if (coursFiltres.length === 0) {
+        coursesGrid.innerHTML = '<p class="empty-state">Aucun cours ne correspond à votre recherche</p>';
+      } else {
+        coursFiltres.forEach(c => coursesGrid.appendChild(creerCarte(c)));
+      }
+    }
+
+    // Events
+    genieSelect.addEventListener("change", majFilieres);
+    matiereSelect.addEventListener("change", function() {
+      afficherCours(this.value);
+    });
+    searchInput.addEventListener("input", filtrerCours);
+
+    // Menu mobile
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector("nav ul");
+    menuToggle.addEventListener("click", () => { 
+      navLinks.classList.toggle("show");
+      menuToggle.setAttribute("aria-expanded", 
+        menuToggle.getAttribute("aria-expanded") === "true" ? "false" : "true");
+    });
+
+    // Initialisation
+    majFilieres();
+  </script>
+</body>
+</html>
